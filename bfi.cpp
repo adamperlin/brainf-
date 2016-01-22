@@ -11,7 +11,7 @@ std::string input;
 
 class myexception : public exception {
     virtual const char* what() const throw(){
-        return "Error: UnbalanceParenthesesException";
+        return "Error: UnbalancedParenthesesException";
 }
 }UnbalancedParenthesesException;
 
@@ -68,11 +68,10 @@ vector<int>* vecptr;
             case ' ':
                 break;
             case ',':
-                cout << "?: ";
                  *cellptr = static_cast<int>(getchar());
                 break;
             default:
-                std::cout << "Oops, didn't get that. Check your syntax" << std::endl;
+               break;
             }
         }
     }else {
@@ -130,14 +129,26 @@ int findOpening (string text, size_t pos){
 };
 int main(int argc, char* argv[]){
     interpreter* i = new interpreter();
+    if (argv[1] == nullptr){
     std::cout << "BrainF Interpreter Running" << std::endl;
     while (std::getline(std::cin,input)){
     std::cout << "> ";
     std::getline(std::cin,input);
     i->interpret(input);
     }
-
-
+    }else {
+        ifstream file(argv[1]);
+        stringstream buff;
+        string contents;
+        if (file.is_open()){
+            buff << file.rdbuf();
+            contents = buff.str();
+            i->interpret(contents);
+        }else {
+            cout << "Please enter a valid file path" << endl;
+            cout << "To use BF interpreter shell, provide no arguments" << endl;
+        }
+    }
 return 0;
 }
 
