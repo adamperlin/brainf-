@@ -2,30 +2,35 @@
 #include <vector>
 #include <string>
 #include <stack>
-//BrainFuck Interpreter:
-//to fix: multiple nested loops
-//throwing unbalance parentheses exceptions.
+#include <fstream>
+#include <sstream>
+
 using namespace std;
+
 std::string input;
+
 class myexception : public exception {
     virtual const char* what() const throw(){
         return "Error: UnbalanceParenthesesException";
 }
 }UnbalancedParenthesesException;
+
 class interpreter {
 public:
     interpreter():
         cells(30000)
     {
         this->cellptr = cells.begin();
+        this->vecptr = &cells;
     }
-
+    ~interpreter(){
+        delete vecptr;
+    }
 std::vector<int>::iterator cellptr;
 std::vector<int> cells;
-stack<vector<int>::iterator> conditionCellPtrs;
+vector<int>* vecptr;
  void interpret(std::string i){
     if (checkParentheses(i)){
-
         for (auto iter = i.begin(); iter != i.end(); ++iter){
             switch(*iter){
             case '+':
@@ -35,7 +40,8 @@ stack<vector<int>::iterator> conditionCellPtrs;
                 (*cellptr)--;
                 break;
             case '.':
-                std::cout << static_cast<char>(*cellptr);
+                //std::cout << static_cast<char>(*cellptr);
+                cout << static_cast<char>(*cellptr);
                 break;
             case '>':
                 ++cellptr;
@@ -55,17 +61,15 @@ stack<vector<int>::iterator> conditionCellPtrs;
                    // size_t temp = (i.rfind('[',iter-i.begin()));
                    size_t temp = findOpening(i, iter-i.begin());
                     iter = i.begin()+temp;
-
                 }
                 break;
-
             case 'q':
                 exit(0);
             case ' ':
                 break;
             case ',':
                 cout << "?: ";
-                cin >> *cellptr;
+                 *cellptr = static_cast<int>(getchar());
                 break;
             default:
                 std::cout << "Oops, didn't get that. Check your syntax" << std::endl;
@@ -95,7 +99,6 @@ stack<char> s;
     }
     return s.empty() ? true : false;
 }
-
 int findClosing (string text, size_t pos){
 	size_t close = pos;
 	int counter = 1;
@@ -125,17 +128,17 @@ int findOpening (string text, size_t pos){
 	return openpos;
 }
 };
-int main(){
-      interpreter* i = new interpreter();
-    std::cout << "BrainFuck Interpreter Running" << std::endl;
+int main(int argc, char* argv[]){
+    interpreter* i = new interpreter();
+    std::cout << "BrainF Interpreter Running" << std::endl;
     while (std::getline(std::cin,input)){
     std::cout << "> ";
     std::getline(std::cin,input);
-    //i->cells.push_back(1);
-    //std::cout << i->cells[0] << std::endl;
     i->interpret(input);
-
     }
+
+
+return 0;
 }
 
 
