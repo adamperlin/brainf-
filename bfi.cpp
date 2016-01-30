@@ -149,6 +149,7 @@ int main(int argc, char* argv[]){
             cout << "To use BF interpreter shell, provide no arguments" << endl;
         }
     }
+delete i;
 return 0;
 }
 
