@@ -4,8 +4,19 @@
 #include <stack>
 #include <fstream>
 #include <sstream>
-#ifndef _BFI_H
-namespace interpreter {
+#ifndef BFI_H
+using namespace std;
+namespace bfi {
+double bfiversion = 1.0;
+
+inline extern void version(){
+    cout << "bfi v. " << version << endl;
+}
+inline extern void options() {
+    cout << "bfi [options] -v -h" << endl;
+    cout << "bfi [filepath]" << endl;
+    cout << "bfi [noargs] (for interactive interpreter)" << endl;
+}
   class myexception : public exception {
       virtual const char* what() const throw(){
           return "Error: UnbalancedParenthesesException";
@@ -20,9 +31,7 @@ namespace interpreter {
               this->cellptr = cells.begin();
               this->vecptr = &cells;
           }
-        virtual ~interpreter(){
-              delete vecptr;
-          }
+        virtual ~interpreter(){}
       std::vector<int>::iterator cellptr;
       std::vector<int> cells;
       vector<int>* vecptr;
@@ -124,5 +133,5 @@ namespace interpreter {
       	return openpos;
       }
   }; // end class interpreter
-}//end namespace interpreter
+}//end namespace bfi
 #endif

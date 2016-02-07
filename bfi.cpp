@@ -1,10 +1,16 @@
 #include "bfi.h"
 
 using namespace std;
-using namespace interpreter;
+using namespace bfi;
 std::string input;
 int main(int argc, char* argv[]){
     interpreter* i = new interpreter();
+
+
+
+
+
+
     if (argv[1] == nullptr){
     std::cout << "BrainF Interpreter Running" << std::endl;
     while (std::getline(std::cin,input)){
@@ -12,6 +18,7 @@ int main(int argc, char* argv[]){
     std::getline(std::cin,input);
     i->interpret(input);
     }
+
     }else {
         ifstream file(argv[1]);
         stringstream buff;
@@ -21,8 +28,14 @@ int main(int argc, char* argv[]){
             contents = buff.str();
             i->interpret(contents);
         }else {
-            cout << "Please enter a valid file path" << endl;
-            cout << "To use BF interpreter shell, provide no arguments" << endl;
+             if(static_cast<string>(argv[1]) == "-v"){
+                version();
+                }else if (static_cast<string>(argv[1]) == "-h"){
+                options();
+                }else{
+                cout << "Please enter a valid file path" << endl;
+                }
+
         }
     }
 delete i;
