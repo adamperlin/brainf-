@@ -35,7 +35,7 @@ inline extern void options() {
       std::vector<int>::iterator cellptr;
       std::vector<int> cells;
       vector<int>* vecptr;
-       void interpret(std::string i){
+       void interpret(std::string& i){
           if (checkParentheses(i)){
               for (auto iter = i.begin(); iter != i.end(); ++iter){
                   switch(*iter){
@@ -88,7 +88,7 @@ inline extern void options() {
               }
           }
       }
-      bool checkParentheses(string str) {
+      bool checkParentheses(string& str) {
       stack<char> s;
           for (string::iterator it = str.begin(); it != str.end(); ++it){
               if (*it == '[')
@@ -104,7 +104,7 @@ inline extern void options() {
           }
           return s.empty() ? true : false;
       }
-      int findClosing (string text, size_t pos){
+      int findClosing (string& text, size_t pos){
       	size_t close = pos;
       	int counter = 1;
       	while (counter > 0){
@@ -118,7 +118,7 @@ inline extern void options() {
       	}
       	return close;
       }
-      int findOpening (string text, size_t pos){
+      int findOpening (string& text, size_t pos){
       	int openpos = pos;
       	int counter = 1;
       	while (counter > 0){

@@ -5,18 +5,13 @@ using namespace bfi;
 std::string input;
 int main(int argc, char* argv[]){
     interpreter* i = new interpreter();
-
-
-
-
-
-
     if (argv[1] == nullptr){
     std::cout << "BrainF Interpreter Running" << std::endl;
     while (std::getline(std::cin,input)){
     std::cout << "> ";
     std::getline(std::cin,input);
-    i->interpret(input);
+    string& ref = input;
+    i->interpret(ref);
     }
 
     }else {
