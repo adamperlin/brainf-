@@ -21,7 +21,8 @@ int main(int argc, char* argv[]){
         if (file.is_open()){
             buff << file.rdbuf();
             contents = buff.str();
-            i->interpret(contents);
+            string& ref = contents;
+            i->interpret(ref);
         }else {
              if(static_cast<string>(argv[1]) == "-v"){
                 version();
