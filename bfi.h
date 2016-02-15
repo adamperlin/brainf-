@@ -5,7 +5,7 @@
 #include <fstream>
 #include <sstream>
 #ifndef BFI_H
-#defind BFI_H
+#define BFI_H
 using namespace std;
 namespace bfi {
 double bfiversion = 1.0;
