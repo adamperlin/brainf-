@@ -10,10 +10,11 @@ using namespace std;
 namespace bfi {
 double bfiversion = 1.0;
 
-inline extern void version(){
-    cout << "bfi v. " << version << endl;
+inline double version(){
+    cout << "bfi version "
+	 << bfiversion << endl;
 }
-inline extern void options() {
+inline void options() {
     cout << "bfi [options] -v -h" << endl;
     cout << "bfi [filepath]" << endl;
     cout << "bfi [noargs] (for interactive interpreter)" << endl;
